@@ -25,4 +25,7 @@ To set up and run this project locally, follow these steps:
   python manage.py createsuperuser
 5.Add Super-Admin from Django Admin
 
-  
+## Running Tests
+
+To run the project's tests, use the following command:
+    python manage.py test
