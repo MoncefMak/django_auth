@@ -19,9 +19,6 @@ secret_settings.py
 # Ignore environment-specific settings files (e.g., settings/local.py)
 settings/*.py
 
-# Ignore virtual environment folders (if using virtualenv)
-venv/
-.venv/
 
 # Ignore compiled Python files
 *.pyc
