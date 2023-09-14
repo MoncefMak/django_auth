@@ -21,8 +21,10 @@ To set up and run this project locally, follow these steps:
 3. Run migrations:
   python manage.py makemigrations
   python manage.py migrate
+
 4.Run the following command for creating a superUser:
   python manage.py createsuperuser
+
 5.Add Super-Admin from Django Admin
 
 ## Running Tests
