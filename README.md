@@ -16,15 +16,22 @@ To set up and run this project locally, follow these steps:
 
 1. Clone the repository:
    https://github.com/MoncefMak/django_auth.git
-2. Install the required Python packages:
+2. Create and activate a virtual environment (optional but recommended for isolation):
+   # On Windows
+   python -m venv venv
+   venv\Scripts\activate
+
+   # On macOS and Linux
+   python3 -m venv venv
+   source venv/bin/activate
+   
+4. Install the required Python packages:
   pip install -r requirements.txt
-3. Run migrations:
+5. Run migrations:
   python manage.py makemigrations
   python manage.py migrate
-
 4.Run the following command for creating a superUser:
   python manage.py createsuperuser
-
 5.Add Super-Admin from Django Admin
 
 ## Running Tests
