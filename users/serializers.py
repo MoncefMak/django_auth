@@ -6,7 +6,7 @@ from users.models import User
 class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "email", "username", "password", "role"]
+        fields = ["id", "email", "username", "password"]
         extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
@@ -18,7 +18,7 @@ class CustomerSerializer(serializers.ModelSerializer):
 class StuffSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "email", "username", "password", "role"]
+        fields = ["id", "email", "username", "password"]
         extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
@@ -30,7 +30,7 @@ class StuffSerializer(serializers.ModelSerializer):
 class SuperAdminSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "email", "username", "password", "role"]
+        fields = ["id", "email", "username", "password"]
         extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
