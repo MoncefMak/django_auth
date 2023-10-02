@@ -1,4 +1,4 @@
-from rest_framework import serializers
+itfrom rest_framework import serializers
 
 from users.models import User
 
@@ -6,7 +6,7 @@ from users.models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "email", "username", "password", "role"]
+        fields = ["id", "email", "username", "password"]
         extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
@@ -23,7 +23,7 @@ class UserSerializer(serializers.ModelSerializer):
 class CustomerSerializer(UserSerializer):
     class Meta:
         model = User
-        fields = ["id", "email", "username", "password", "role"]
+        fields = ["id", "email", "username", "password"]
         extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
@@ -35,7 +35,7 @@ class CustomerSerializer(UserSerializer):
 class StuffSerializer(UserSerializer):
     class Meta:
         model = User
-        fields = ["id", "email", "username", "password", "role"]
+        fields = ["id", "email", "username", "password"]
         extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
