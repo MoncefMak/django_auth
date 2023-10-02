@@ -7,7 +7,7 @@ This Django project provides user authentication with JWT token-based authentica
 - JWT token-based authentication
 - User registration with automatic profile creation as customer
 - Three user types: super-admin, stuff, and customer
-- Super-admin can create Stuffs and sumer-admin users 
+- Super-admin can create Stuffs and spmer-admin users 
 - API endpoints for user registration and profile management
 
 ## Installation
