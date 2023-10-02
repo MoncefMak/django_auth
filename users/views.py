@@ -1,6 +1,4 @@
-# views.py
-from rest_framework import generics
-from rest_framework import status
+from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
@@ -10,6 +8,7 @@ from .serializers import CustomerSerializer, StuffSerializer, SuperAdminSerializ
 
 
 class BaseCreateUserView(generics.CreateAPIView):
+
     def create_user(self, serializer_class, request):
         serializer = serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -17,23 +16,24 @@ class BaseCreateUserView(generics.CreateAPIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-#
 class RegisterView(BaseCreateUserView):
+    serializer_class = CustomerSerializer
+
     def post(self, request):
-        return self.create_user(CustomerSerializer, request)
+        return self.create_user(self.serializer_class, request)
 
 
 class CreateStuffUserView(BaseCreateUserView):
-    permission_classes = [IsAuthenticated and SuperAdminPermission]
-    required_role = User.Role.SUPERADMIN
+    permission_classes = [IsAuthenticated & SuperAdminPermission]
+    serializer_class = StuffSerializer
 
     def post(self, request):
-        return self.create_user(StuffSerializer, request)
+        return self.create_user(self.serializer_class, request)
 
 
 class SuperAdminUserView(BaseCreateUserView):
-    permission_classes = [IsAuthenticated and SuperAdminPermission]
+    permission_classes = [IsAuthenticated & SuperAdminPermission]
+    serializer_class = SuperAdminSerializer
 
     def post(self, request):
-        return self.create_user(SuperAdminSerializer, request)
-
+        return self.create_user(self.serializer_class, request)
