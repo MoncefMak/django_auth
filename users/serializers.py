@@ -1,35 +1,39 @@
 from rest_framework import serializers
+
 from users.models import User
 
-class BaseUserSerializer(serializers.ModelSerializer):
+
+class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "email", "username", "password"]
+        fields = ["id", "email", "username", "password", "role"]
         extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
-        role = self.Meta.role
-        is_staff = self.Meta.is_staff
-        validated_data['role'] = role
-        validated_data['is_staff'] = is_staff
-        user = User.objects.create(**validated_data)
-        user.set_password(validated_data['password'])
-        user.save()
-        return user
+        validated_data['role'] = User.Role.CUSTOMER
+        validated_data['is_staff'] = False
+        return super().create(validated_data)
 
-class CustomerSerializer(BaseUserSerializer):
-    class Meta:
-        role = User.Role.CUSTOMER
-        is_staff = False
 
-class StuffSerializer(BaseUserSerializer):
+class StuffSerializer(serializers.ModelSerializer):
     class Meta:
-        role = User.Role.STUFF
-        is_staff = False
-
-class SuperAdminSerializer(BaseUserSerializer):
-    class Meta:
+        model = User
         fields = ["id", "email", "username", "password", "role"]
         extra_kwargs = {"password": {"write_only": True}}
-        role = User.Role.SUPERADMIN
-        is_staff = True
+
+    def create(self, validated_data):
+        validated_data['role'] = User.Role.STUFF
+        validated_data['is_staff'] = False
+        return super().create(validated_data)
+
+
+class SuperAdminSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["id", "email", "username", "password", "role"]
+        extra_kwargs = {"password": {"write_only": True}}
+
+    def create(self, validated_data):
+        validated_data['role'] = User.Role.SUPERADMIN
+        validated_data['is_staff'] = True
+        return super().create(validated_data)
